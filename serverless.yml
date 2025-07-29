@@ -6,9 +6,13 @@ useDotenv: true
 
 plugins:
   - serverless-offline
-  - serverless-domain-manager
+  - serverless-prune-plugin
+#  - serverless-domain-manager
 
-#custom:
+custom:
+  prune:
+    automatic: true
+    number: 2
 #  customDomain:
 #    domainName: *
 #    basePath: auth
@@ -208,7 +212,7 @@ functions:
     handler: src/handlers/itemHandler.createItemHandler
     events:
       - http:
-          path: collections/{collectionId}/items
+          path: collections/{id}/items
           method: post
           cors: true
 
@@ -240,7 +244,7 @@ functions:
     handler: src/handlers/itemHandler.getAllItemsHandler
     events:
       - http:
-          path: collections/{collectionId}/items
+          path: collections/{id}/items
           method: get
           cors: true
 
@@ -267,19 +271,5 @@ functions:
           path: items/{id}/toggle
           method: post
           cors: true
-
-  #====================================================================
-
-  test:
-    handler: src/handlers/testHandler.testHandler
-    events:
-      - http:
-          path: test
-          method: post
-          cors: true
-          authorizer:
-            name: CognitoAuth
-            type: COGNITO_USER_POOLS
-            arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
 
   #====================================================================

@@ -7,7 +7,7 @@ import * as itemService from '../services/itemService.js';
  * @returns {Promise<Object>}
  */
 export const createItem = async event => {
-  const { collectionId } = event.pathParameters;
+  const { id: collectionId } = event.pathParameters;
   const data = event.body;
   const newItem = await itemService.createItem(collectionId, data);
   return response(201)(newItem);
@@ -53,7 +53,7 @@ export const deleteItem = async event => {
  * @returns {Promise<Object>}
  */
 export const getAllItems = async event => {
-  const { collectionId } = event.pathParameters;
+  const { id: collectionId } = event.pathParameters;
   const {
     filters = {},
     page = 1,
