@@ -17,7 +17,7 @@ const itemSchema = new mongoose.Schema(
       type: String,
     },
     photos: {
-      type: [String], // масив URL-адрес
+      type: [String],
       default: [],
     },
     isCompleted: {

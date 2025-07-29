@@ -15,10 +15,10 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: false, // не обов’язково, якщо лише AppleID
+      required: false,
     },
     avatar: {
-      type: String, // URL до зображення
+      type: String,
     },
   },
   { timestamps: true },
