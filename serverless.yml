@@ -73,6 +73,79 @@ functions:
       - http:
           path: auth/logout
           method: post
+
+  #====================================================================
+
+  createCollection:
+    handler: src/handlers/collectionHandler.createCollectionHandler
+    events:
+      - http:
+          path: collections
+          method: post
+
+  getCollectionById:
+    handler: src/handlers/collectionHandler.getCollectionByIdHandler
+    events:
+      - http:
+          path: collections/{id}
+          method: get
+
+  updateCollection:
+    handler: src/handlers/collectionHandler.updateCollectionHandler
+    events:
+      - http:
+          path: collections/{id}
+          method: put
+
+  deleteCollection:
+    handler: src/handlers/collectionHandler.deleteCollectionHandler
+    events:
+      - http:
+          path: collections/{id}
+          method: delete
+
+  getAllCollections:
+    handler: src/handlers/collectionHandler.getAllCollectionsHandler
+    events:
+      - http:
+          path: collections
+          method: get
+
+  addViewUser:
+    handler: src/handlers/collectionHandler.addViewUserHandler
+    events:
+      - http:
+          path: collections/{id}/view
+          method: post
+
+  addEditUser:
+    handler: src/handlers/collectionHandler.addEditUserHandler
+    events:
+      - http:
+          path: collections/{id}/edit
+          method: post
+
+  removeViewUser:
+    handler: src/handlers/collectionHandler.removeViewUserHandler
+    events:
+      - http:
+          path: collections/{id}/view
+          method: delete
+
+  removeEditUser:
+    handler: src/handlers/collectionHandler.removeEditUserHandler
+    events:
+      - http:
+          path: collections/{id}/edit
+          method: delete
+
+  cloneCollection:
+    handler: src/handlers/collectionHandler.cloneCollectionHandler
+    events:
+      - http:
+          path: collections/{id}/clone
+          method: post
+
   #====================================================================
 
   test:
