@@ -1,12 +1,20 @@
-org: author
-service: aws-server-template
+service: wishly-server
 
-frameworkVersion: '3'
+frameworkVersion: '4'
+
+useDotenv: true
 
 plugins:
-  - serverless-bundle
   - serverless-offline
-  - serverless-dotenv-plugin
+  - serverless-domain-manager
+
+#custom:
+#  customDomain:
+#    domainName: *
+#    basePath: auth
+#    stage: ${self:provider.stage}
+#    createRoute53Record: true
+#    certificateName: *
 
 provider:
   name: aws
@@ -15,6 +23,13 @@ provider:
   stage: dev
   profile: serverlessUser
   timeout: 20
+  environment:
+    MONGODB_USER: ${env:MONGODB_USER}
+    MONGODB_PASSWORD: ${env:MONGODB_PASSWORD}
+    MONGODB_URL: ${env:MONGODB_URL}
+    MONGODB_DB: ${env:MONGODB_DB}
+    COGNITO_USER_POOL_ID: ${env:COGNITO_USER_POOL_ID}
+    COGNITO_CLIENT_ID: ${env:COGNITO_CLIENT_ID}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -71,24 +86,4 @@ functions:
             type: COGNITO_USER_POOLS
             arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
 
-  test2:
-    handler: src/handlers/testHandler.testHandler2
-    events:
-      - http:
-          path: test2
-          method: post
-          authorizer:
-            name: CognitoAuth
-            type: COGNITO_USER_POOLS
-            arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
-
-  test3:
-    handler: src/handlers/testHandler.testHandler3
-    events:
-      - http:
-          path: test3
-          method: post
-          authorizer:
-            name: CognitoAuth
-            type: COGNITO_USER_POOLS
-            arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
+  #====================================================================
