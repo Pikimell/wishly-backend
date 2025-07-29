@@ -148,6 +148,64 @@ functions:
 
   #====================================================================
 
+  createItem:
+    handler: src/handlers/itemHandler.createItemHandler
+    events:
+      - http:
+          path: collections/{collectionId}/items
+          method: post
+
+  getItemById:
+    handler: src/handlers/itemHandler.getItemByIdHandler
+    events:
+      - http:
+          path: items/{id}
+          method: get
+
+  updateItem:
+    handler: src/handlers/itemHandler.updateItemHandler
+    events:
+      - http:
+          path: items/{id}
+          method: put
+
+  deleteItem:
+    handler: src/handlers/itemHandler.deleteItemHandler
+    events:
+      - http:
+          path: items/{id}
+          method: delete
+
+  getAllItems:
+    handler: src/handlers/itemHandler.getAllItemsHandler
+    events:
+      - http:
+          path: collections/{collectionId}/items
+          method: get
+
+  markItemCompleted:
+    handler: src/handlers/itemHandler.markItemCompletedHandler
+    events:
+      - http:
+          path: items/{id}/complete
+          method: post
+
+  markItemUncompleted:
+    handler: src/handlers/itemHandler.markItemUncompletedHandler
+    events:
+      - http:
+          path: items/{id}/uncomplete
+          method: post
+
+  toggleItemStatus:
+    handler: src/handlers/itemHandler.toggleItemStatusHandler
+    events:
+      - http:
+          path: items/{id}/toggle
+          method: post
+
+  #====================================================================
+
   test:
     handler: src/handlers/testHandler.testHandler
     events:
