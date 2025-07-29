@@ -3,6 +3,8 @@ export function parseJson(event) {
     try {
       const data = JSON.parse(event.body);
       event.body = data;
-    } catch {}
+    } catch {
+      throw new Error('Error parsing body');
+    }
   }
 }

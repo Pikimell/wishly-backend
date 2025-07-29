@@ -1,4 +1,8 @@
 export const parseIP = (event) => {
-  const userIP = event.requestContext.identity.sourceIp;
-  event.userIP = userIP;
+  try {
+    const userIP = event.requestContext.identity.sourceIp;
+    event.userIP = userIP;
+  } catch {
+    throw new Error('Error parsing User IP');
+  }
 };

@@ -10,7 +10,6 @@ export const ctrlWrapper = (controller, ...middleware) => {
 
       parseJson(event);
       parseIP(event);
-      parseDevice(event);
 
       for (const callback of middleware) {
         await callback(event, context);
