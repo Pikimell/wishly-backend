@@ -6,15 +6,11 @@ import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 /**
  * Створює нову колекцію
  * @param {Object} data - дані колекції
- * @param {string} ownerId - ID власника колекції
  * @returns {Promise<Collection>}
  */
-export const createCollection = async (data, ownerId) => {
+export const createCollection = async collection => {
   try {
-    const newCollection = new Collection({
-      ...data,
-      owner: ownerId,
-    });
+    const newCollection = new Collection(collection);
     return await newCollection.save();
   } catch (error) {
     throw createHttpError(500, error.message);

@@ -10,8 +10,8 @@ import * as collectionService from '../services/collectionService.js';
  * @returns {Promise<Object>}
  */
 export const createCollection = async event => {
-  const { body, user } = event;
-  const newCollection = await collectionService.createCollection(body, user.id);
+  const { body } = event;
+  const newCollection = await collectionService.createCollection(body);
   return response(201)(newCollection);
 };
 
