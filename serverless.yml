@@ -1,0 +1,94 @@
+org: author
+service: aws-server-template
+
+frameworkVersion: '3'
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: dev
+  profile: serverlessUser
+  timeout: 20
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cognito-idp:*
+      Resource:
+        - arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
+
+#====================================================================
+functions:
+  registerUser:
+    handler: src/handlers/authHandler.registerHandler
+    events:
+      - http:
+          path: auth/register
+          method: post
+
+  confirmRegister:
+    handler: src/handlers/authHandler.confirmRegisterHandler
+    events:
+      - http:
+          path: auth/register/confirm
+          method: post
+
+  updateUserGroup:
+    handler: src/handlers/authHandler.updateGroupHandler
+    events:
+      - http:
+          path: auth/updateGroup
+          method: post
+
+  loginUser:
+    handler: src/handlers/authHandler.loginHandler
+    events:
+      - http:
+          path: auth/login
+          method: post
+
+  logoutUser:
+    handler: src/handlers/authHandler.logoutHandler
+    events:
+      - http:
+          path: auth/logout
+          method: post
+  #====================================================================
+
+  test:
+    handler: src/handlers/testHandler.testHandler
+    events:
+      - http:
+          path: test
+          method: post
+          authorizer:
+            name: CognitoAuth
+            type: COGNITO_USER_POOLS
+            arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
+
+  test2:
+    handler: src/handlers/testHandler.testHandler2
+    events:
+      - http:
+          path: test2
+          method: post
+          authorizer:
+            name: CognitoAuth
+            type: COGNITO_USER_POOLS
+            arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
+
+  test3:
+    handler: src/handlers/testHandler.testHandler3
+    events:
+      - http:
+          path: test3
+          method: post
+          authorizer:
+            name: CognitoAuth
+            type: COGNITO_USER_POOLS
+            arn: arn:aws:cognito-idp:us-east-1:884252207764:userpool/us-east-1_iLGqg20bi
